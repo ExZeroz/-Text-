@@ -1,0 +1,108 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/naypramx/Ui__Project/Script/XeNonUi", true))()
+library:CreateWatermark("Version 0.0.001")
+local CenterHubNo1 = library:CreateWindow("Prison Life",Enum.KeyCode.RightControl)
+local Tab = CenterHubNo1:CreateTab("First Page")
+local Sector1 = Tab:CreateSector("Weapon","left")
+Sector1:AddButton("Remington 870",function()
+    local ohInstance1 = workspace.Prison_ITEMS.giver["Remington 870"].ITEMPICKUP
+
+    workspace.Remote.ItemHandler:InvokeServer(ohInstance1)
+end)
+
+Sector1:AddButton("AK-47",function()
+    local ohInstance1 = workspace.Prison_ITEMS.giver["AK-47"].ITEMPICKUP
+
+    workspace.Remote.ItemHandler:InvokeServer(ohInstance1)
+end)
+
+Sector1:AddButton("M9",function()
+    local Weapon = {"M9"}
+    for i,v in pairs(workspace.Prison_ITEMS.giver:GetChildren()) do
+    if v.Name == Weapon[1] then
+    local lol = workspace.Remote.ItemHandler:InvokeServer(v.ITEMPICKUP)
+    end
+    end
+ 
+    local Remote = game.Workspace.Remote['ItemHandler']
+ 
+    local Arguments = {
+            [1] = Workspace.Prison_ITEMS.single:WaitForChild("Key card").ITEMPICKUP
+    }
+ 
+    Remote:InvokeServer(unpack(Arguments))
+end)
+
+Sector1:AddButton("Remove Doors",function()
+    game.Workspace.Doors:Destroy()
+    game.Workspace.Prison_Cellblock.doors:Destroy()
+    local Warehouses = game.Workspace.Warehouses
+    for i,v in pairs(Warehouses:GetDescendants()) do
+        if v.Name == "doors" then
+           v:Destroy()
+        end
+    end
+end)
+
+local Sector1 = Tab:CreateSector("Gun Mod","Right")
+Sector1:AddButton("Remington 870",function()
+    local weapon = require(game.Players.LocalPlayer.Backpack["Remington 870"].GunStates)
+
+    weapon["FireRate"] = 0.000001
+    weapon["MaxAmmo"] = math.huge
+    weapon["Bullets"] = 6
+    weapon["AutoFire"] = true
+end)
+
+Sector1:AddButton("AK-47",function()
+    local weapon = require(game.Players.LocalPlayer.Backpack["AK-47"].GunStates)
+
+    weapon["FireRate"] = 0.000001
+    weapon["MaxAmmo"] = math.huge
+    weapon["Bullets"] = 30
+end)
+
+Sector1:AddButton("M9",function()
+    local weapon = require(game.Players.LocalPlayer.Backpack["M9"].GunStates)
+
+    weapon["FireRate"] = 0.000001
+    weapon["MaxAmmo"] = math.huge
+    weapon["Bullets"] = 9
+    weapon["AutoFire"] = true
+end)
+
+local Tab = CenterHubNo1:CreateTab("First Page")
+local Sector1 = Tab:CreateSector("Teleport","left")
+
+Sector1:AddButton("Criminal Base",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-859.15161132813, 94.476051330566, 2058.5427246094)
+end)
+Sector1:AddButton("Downtown",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-300.44033813477, 54.175037384033, 1781.2364501953)
+end)
+Sector1:AddButton("Entrance Gate",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(491.27182006836, 98.039939880371, 2216.3107910156)
+end)
+Sector1:AddButton("Entrance",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(653.81713867188, 99.990005493164, 2272.083984375)
+end)
+Sector1:AddButton("Yard",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(781.6845703125, 97.999946594238, 2462.8779296875)
+end)
+Sector1:AddButton("Hallway",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(860.78448486328, 99.990005493164, 2362.9597167969)
+end)
+Sector1:AddButton("Cell Block",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(918.43115234375, 99.989990234375, 2440.3828125)
+end)
+Sector1:AddButton("Cafeteria",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(932.06213378906, 99.989959716797, 2290.4250488281)
+end)
+Sector1:AddButton("Armory",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(835.28918457031, 99.990005493164, 2285.4909667969)
+end)
+Sector1:AddButton("Gaurds Only",function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(830.04302978516, 99.990005493164, 2327.0859375)
+end)
+Sector1:AddButton("Rejoin Server",function()
+    game:GetService("TeleportService"):Teleport(game.PlaceId)
+end)
