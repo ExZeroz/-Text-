@@ -1,0 +1,77 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/naypramx/Ui__Project/Script/XeNonUi", true))()
+library:CreateWatermark("xNsZen#0001")
+local CenterHubNo1 = library:CreateWindow("XenHub",Enum.KeyCode.RightControl)
+local Tab = CenterHubNo1:CreateTab("Critical Legend")
+local Sector1 = Tab:CreateSector("LocalPlayer","left")
+Sector1:AddButton("God Mode",function()
+    local old;
+    old = hookfunction(getrawmetatable(game).__namecall,function(...)
+        local args = {...}
+        if getnamecallmethod() == "FireServer" and args[1].Name == "Damage" and tostring(args[2]) == game.Players.LocalPlayer.Name then
+            return
+        end
+        return old(...)
+    end)
+end)
+
+Sector1:AddButton("Collect Chests",function()
+    local r = game.Players.LocalPlayer.Character.HumanoidRootPart
+    for i,v in pairs(workspace.Chests:GetChildren()) do
+        firetouchinterest(r,v.Giver,0)
+        firetouchinterest(r,v.Giver,1)
+    end
+end)
+
+Sector1:AddButton("Inf PassiveItems",function()
+    game.Players.LocalPlayer.Character.PassiveItems.ChildAdded:Connect(function(v)
+        task.wait()
+        v:Destroy()
+     end)
+end)
+
+Sector1:AddButton("Styles Change",function()
+--// Services \\--
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+
+--// Variables \\--
+local Player = Players.LocalPlayer
+local StatsChange = ReplicatedStorage:WaitForChild("Remotes"):WaitForChild("StatsChange")
+local Storage = ReplicatedStorage:WaitForChild("CS_Keys"):WaitForChild("CS_Storage_Key")
+
+--// Get Styles \\--
+local Styles = {}
+for _, A_1 in next, Storage:GetChildren() do
+    table.insert(Styles, A_1.Value)
+end
+table.sort(Styles)
+
+--// UI Library \\--
+local Library = loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/Just-Egg-Salad/roblox-scripts/main/uwuware'))()
+local Window = Library:CreateWindow("Style Change by [CW]")
+Window:AddList({
+    text = "Style",
+    values = Styles,
+    callback = function(A_2)
+        for _, A_1 in next, Storage:GetChildren() do
+            if A_1.Value == A_2 then
+                StatsChange:FireServer("CombatStyle", {
+                    Base = {Position = Player.Character.HumanoidRootPart.Position},
+                    CombatStyle = {Value = A_1.Name}
+                })
+            end
+        end
+    end
+})
+Library:Init()
+end)
+
+local Sector3 = Tab:CreateSector("WalkSpeed","left")
+Sector3:AddSlider("Slider By Center",20,50,100,1,function(x)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = x
+end)
+
+local Sector3 = Tab:CreateSector("JumpPower","left")
+Sector3:AddSlider("Slider By Center",20,50,100,1,function(x)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = x
+end)
