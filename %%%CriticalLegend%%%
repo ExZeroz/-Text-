@@ -66,6 +66,25 @@ Window:AddList({
 Library:Init()
 end)
 
+Sector1:AddButton("get 1 of every item & material",function()
+    for i,v in pairs(game.ReplicatedStorage.Items:GetDescendants()) do
+        if v:IsA("Frame") then
+            game.ReplicatedStorage.Remotes.Shop:FireServer("Buy1", {
+            Cost = {Value = 0},
+            Name = v.Name
+            })
+        end
+    end
+end)
+
+Sector1:AddButton("Inf Gold",function()
+    local Amount = 1000000
+    game.ReplicatedStorage.Remotes.Shop:FireServer("Buy1", {
+        Cost = {Value = -Amount},
+        Name = "Power Potion"
+    })
+end)
+
 local Sector3 = Tab:CreateSector("WalkSpeed","left")
 Sector3:AddSlider("Slider By Center",20,50,100,1,function(x)
     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = x
