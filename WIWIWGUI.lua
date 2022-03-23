@@ -98,7 +98,7 @@ Discord.Parent = game:GetService("CoreGui")
 Discord.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 function DiscordLib:Window(text,mainclr,cls)
-	local PresetColor = mainclr or Color3.fromRGB(0,255,255) or _G.Color
+	local PresetColor = mainclr or Color3.fromRGB(255, 189, 255) or _G.Color
 	local CloseBind = cls or Enum.KeyCode.RightControl or _G.Toggle
 	local currentservertoggled = ""
 	local minimized = false
